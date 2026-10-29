@@ -1,8 +1,8 @@
 # InvestPro — Investment Portfolio & Trading Simulator
 
-InvestPro is a web application developed for a Java OOP coursework project. Users can register and sign in, browse sample stocks, bonds and mutual funds, simulate buy and sell orders, monitor portfolio value and profit/loss, view transaction history, and export transaction history as CSV.
+InvestPro is a web application developed for a Java OOP coursework project. Users can register and sign in, browse sample stocks, bonds, and mutual funds, simulate buy and sell orders, monitor portfolio value and profit/loss, view transaction history, and export transaction history as CSV.
 
-> **Important:** This is a coursework simulation. Investment prices are illustrative and are not live market prices. No real money or real trades are involved.
+> **Important:** This is an educational simulation. Investment prices are illustrative and are not live market prices. No real money or real trades are involved.
 
 ## Features
 
@@ -33,7 +33,7 @@ This project demonstrates the following Java OOP concepts:
 - **Inheritance:** Specialized investment classes extend a common investment class.
 - **Abstraction:** A common abstract investment class defines shared behaviour.
 - **Polymorphism:** Different investment types implement their own behaviour.
-- **Interfaces:** The Tradable interface defines common trading operations.
+- **Interfaces:** The `Tradable` interface defines common trading operations.
 - **Method Overloading:** Methods can use different parameter lists.
 - **Method Overriding:** Subclasses provide their own implementations of inherited methods.
 - **Exception Handling:** Custom exceptions handle errors such as insufficient funds and invalid quantities.
@@ -63,7 +63,7 @@ The following instructions describe the local development setup. MySQL paths and
 
 The development machine uses the MySQL 8.4 data directory `/opt/homebrew/var/mysql84`, socket `/tmp/mysql84.sock`, and port `3307`.
 
-If the existing MySQL server is stopped, open a separate Terminal window and run:
+If your existing MySQL server is stopped, open a separate Terminal window and run:
 
 ```bash
 /opt/homebrew/opt/mysql@8.4/bin/mysqld_safe \
@@ -92,7 +92,7 @@ mysqld is alive
 
 Open the InvestPro project folder in VS Code.
 
-Select **Terminal → New Terminal** and make sure the terminal is in the directory containing `pom.xml` and the `database` folder.
+Open **Terminal → New Terminal** and make sure the terminal is in the project directory containing `pom.xml` and the `database` folder.
 
 Run:
 
@@ -104,7 +104,7 @@ Enter your existing MySQL root password when prompted.
 
 Review `database/setup.sql` before running it to understand the operations it performs.
 
-The application uses `schema.sql` and `data.sql` to initialize its tables and sample investment data when configured to do so by Spring Boot.
+The application also contains `schema.sql` and `data.sql` for database schema and sample data initialization, depending on the Spring Boot configuration.
 
 ### 3. Configure the Database Password
 
@@ -132,7 +132,7 @@ mvn spring-boot:run
 
 Maven may need an internet connection to download dependencies on the first run.
 
-When Spring Boot starts successfully, open the following address in your browser:
+When Spring Boot starts successfully, open:
 
 **http://localhost:8080**
 
@@ -176,9 +176,7 @@ Review the Spring Boot terminal output and verify the database connection settin
 
 ## Application Screenshots
 
-Add screenshots of your actual application to the `screenshots` folder in the project directory.
-
-Replace the example filenames below with the exact names of your screenshot files.
+The screenshots below are stored in the `screenshots` directory.
 
 ### Login Page
 
@@ -188,9 +186,17 @@ Replace the example filenames below with the exact names of your screenshot file
 
 ![InvestPro Dashboard](screenshots/dashboard.png)
 
-### Investment Listings
+### Investment Marketplace
 
-![InvestPro Investments](screenshots/investments.png)
+![InvestPro Investments](screenshots/investment.png)
+
+### Portfolio
+
+![InvestPro Portfolio](screenshots/portfolio.png)
+
+### Transaction Activity
+
+![InvestPro Activity](screenshots/activity.png)
 
 ## Security Note
 
