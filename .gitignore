@@ -1,0 +1,27 @@
+# Java and Maven
+target/
+*.class
+
+# IDE and operating system
+.idea/
+.vscode/
+.DS_Store
+
+# Logs
+*.log
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local database files
+*.ibd
+*.ibdata
+*.ibdata1
+*.ib_logfile*
+*.pid
+*.sock
+
+# Generated exports
+exports/

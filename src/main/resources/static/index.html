@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <title>InvestPro — Portfolio Simulator</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <main id="authView" class="auth-shell">
+    <section class="auth-brand">
+      <div class="brand-mark">IP</div>
+      <p class="eyebrow">INVESTMENT SIMULATOR</p>
+      <h1>Make your next move<br><span>with clarity.</span></h1>
+      <p class="muted auth-copy">Practice building a portfolio, explore simulated products, and learn how every trade changes your balance.</p>
+      <div class="auth-note"><span class="pulse-dot"></span> Paper trading · No real money · Sample prices only</div>
+    </section>
+    <section class="auth-card">
+      <div class="auth-tabs" role="tablist" aria-label="Account access">
+        <button id="loginTab" class="auth-tab active" type="button">Sign in</button>
+        <button id="registerTab" class="auth-tab" type="button">Create account</button>
+      </div>
+      <form id="authForm" class="form-stack">
+        <div id="nameField" class="field hidden">
+          <label for="fullName">Full name</label>
+          <input id="fullName" name="fullName" autocomplete="name" placeholder="Your name" minlength="2" maxlength="100">
+        </div>
+        <div class="field">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="190">
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="At least 6 characters" required minlength="6" maxlength="100">
+        </div>
+        <button id="authSubmit" class="button button-primary full-width" type="submit">Sign in to InvestPro <span aria-hidden="true">↗</span></button>
+        <p class="form-hint">New here? Create an account to begin with ₹1,00,000 in simulated cash.</p>
+      </form>
+      <p id="authError" class="inline-error hidden"></p>
+    </section>
+  </main>
+
+  <div id="appView" class="app-shell hidden">
+    <aside class="sidebar">
+      <a href="#overview" class="brand-lockup" aria-label="InvestPro home"><span class="brand-mark small">IP</span><span>Invest<span class="brand-light">Pro</span></span></a>
+      <div class="side-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-target="overview"><span class="nav-icon">▦</span> Overview</button>
+        <button class="nav-item" data-target="marketplace"><span class="nav-icon">◈</span> Marketplace</button>
+        <button class="nav-item" data-target="portfolio"><span class="nav-icon">▤</span> My portfolio</button>
+        <button class="nav-item" data-target="activity"><span class="nav-icon">↗</span> Activity</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="simulation-box"><span class="simulation-icon">◉</span><div><strong>Simulation mode</strong><p>Illustrative prices only</p></div></div>
+        <button id="logoutButton" class="logout-button"><span>↪</span> Sign out</button>
+      </div>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <div><span class="eyebrow">YOUR FINANCIAL WORKSPACE</span><h2 id="pageHeading">Overview</h2></div>
+        <div class="profile-chip"><span class="avatar" id="avatar">I</span><span><strong id="profileName">Investor</strong><small id="profileEmail">Personal account</small></span></div>
+      </header>
+
+      <div class="content-wrap">
+        <section id="overview" class="page-section">
+          <div class="welcome-row"><div><p class="eyebrow">WEDNESDAY · YOUR SIMULATED PORTFOLIO</p><h1>Good to see you, <span id="welcomeName">Investor</span>.</h1><p class="muted">Track your cash, discover investment ideas, and practice a trade.</p></div><button class="button button-primary" data-jump="marketplace">Explore marketplace <span>↗</span></button></div>
+          <div class="metric-grid">
+            <article class="metric-card metric-dark"><div class="metric-top"><span>Total portfolio value</span><span class="metric-icon">◉</span></div><div id="totalEquity" class="metric-value">₹0</div><div class="metric-foot"><span class="metric-dot"></span> Cash + current holdings</div></article>
+            <article class="metric-card"><div class="metric-top"><span>Available cash</span><span class="metric-icon">₹</span></div><div id="cashBalance" class="metric-value">₹0</div><div class="metric-foot">Ready to invest</div></article>
+            <article class="metric-card"><div class="metric-top"><span>Invested value</span><span class="metric-icon">◫</span></div><div id="marketValue" class="metric-value">₹0</div><div class="metric-foot">Current value of holdings</div></article>
+            <article class="metric-card"><div class="metric-top"><span>Unrealised P/L</span><span class="metric-icon">↗</span></div><div id="profitLoss" class="metric-value">₹0</div><div id="profitLossNote" class="metric-foot">Based on sample prices</div></article>
+          </div>
+
+          <div class="section-heading"><div><p class="eyebrow">A QUICK LOOK</p><h3>Your portfolio</h3></div><button class="text-button" data-jump="portfolio">View all holdings ↗</button></div>
+          <div class="table-card"><div class="table-wrap"><table><thead><tr><th>Investment</th><th>Units</th><th>Avg. cost</th><th>Market value</th><th>Unrealised P/L</th><th></th></tr></thead><tbody id="overviewHoldings"><tr><td colspan="6" class="empty-cell">Loading portfolio…</td></tr></tbody></table></div></div>
+
+          <div class="section-heading market-heading"><div><p class="eyebrow">START EXPLORING</p><h3>Popular investments</h3></div><button class="text-button" data-jump="marketplace">Open marketplace ↗</button></div>
+          <div id="featuredInvestments" class="investment-grid"></div>
+        </section>
+
+        <section id="marketplace" class="page-section hidden">
+          <div class="page-intro"><p class="eyebrow">THE SIMULATED MARKET</p><h1>Find your next investment.</h1><p class="muted">Browse sample stocks, bonds and mutual funds. Prices are simulated illustrations for coursework—not live market data.</p></div>
+          <div class="market-action-row"><button id="simulateMarketButton" class="button button-outline" type="button">↗ Simulate market movement</button><span>Updates sample prices by a small random amount so your portfolio P/L can change.</span></div>
+          <div class="market-controls"><div class="search-box"><span>⌕</span><input id="investmentSearch" type="search" placeholder="Search name or symbol…" aria-label="Search investments"></div><div id="filterGroup" class="filter-group"><button class="filter-pill active" data-filter="ALL">All products</button><button class="filter-pill" data-filter="STOCK">Stocks</button><button class="filter-pill" data-filter="BOND">Bonds</button><button class="filter-pill" data-filter="MUTUAL_FUND">Mutual funds</button></div></div>
+          <div id="allInvestments" class="investment-grid"></div>
+        </section>
+
+        <section id="portfolio" class="page-section hidden">
+          <div class="page-intro"><p class="eyebrow">OWNERSHIP & PERFORMANCE</p><h1>My portfolio</h1><p class="muted">Review the positions you hold and sell units from your simulated account.</p></div>
+          <div class="portfolio-summary"><div><span>Market value</span><strong id="portfolioMarketValue">₹0</strong></div><div><span>Unrealised profit / loss</span><strong id="portfolioProfitLoss">₹0</strong></div><div><span>Positions held</span><strong id="positionCount">0</strong></div></div>
+          <div class="table-card"><div class="table-wrap"><table><thead><tr><th>Investment</th><th>Units</th><th>Average cost</th><th>Current price</th><th>Market value</th><th>Profit / loss</th><th>Action</th></tr></thead><tbody id="portfolioHoldings"><tr><td colspan="7" class="empty-cell">Loading portfolio…</td></tr></tbody></table></div></div>
+          <p class="footnote">Unrealised P/L is the difference between the sample current price and your average purchase cost. Selling may change available cash.</p>
+        </section>
+
+        <section id="activity" class="page-section hidden">
+          <div class="page-intro"><p class="eyebrow">YOUR ORDER JOURNAL</p><h1>Transaction activity</h1><p class="muted">A record of your simulated buys and sells.</p></div>
+          <div class="activity-actions"><div><strong>Transaction history</strong><p class="muted">Your latest 250 transactions are shown here. You can export them to CSV.</p></div><a class="button button-outline" href="/api/transactions/export.csv">Download CSV <span>↓</span></a></div>
+          <div class="table-card"><div class="table-wrap"><table><thead><tr><th>Date & time</th><th>Action</th><th>Investment</th><th>Units</th><th>Price / unit</th><th>Total amount</th></tr></thead><tbody id="transactionRows"><tr><td colspan="6" class="empty-cell">Loading activity…</td></tr></tbody></table></div></div>
+        </section>
+
+        <footer class="app-footer"><span>INVESTPRO · JAVA OOP PROJECT</span><span>Paper-trading simulation. Not financial advice or a real brokerage.</span></footer>
+      </div>
+    </div>
+  </div>
+
+  <dialog id="tradeDialog" class="trade-dialog">
+    <form id="tradeForm" method="dialog">
+      <div class="dialog-top"><div><p class="eyebrow" id="tradeActionLabel">PLACE A SIMULATED ORDER</p><h2 id="tradeTitle">Buy investment</h2></div><button id="closeTrade" class="close-button" type="button" aria-label="Close">×</button></div>
+      <div class="dialog-investment"><span id="tradeBadge" class="asset-badge">ST</span><div><strong id="tradeName">Investment</strong><small id="tradeSymbol">SYMBOL</small></div><strong id="tradePrice">₹0</strong></div>
+      <label class="quantity-label" for="tradeQuantity">Number of units</label>
+      <div class="quantity-input"><button id="minusQuantity" type="button" aria-label="Decrease quantity">−</button><input id="tradeQuantity" type="number" min="1" max="1000000" step="1" value="1" required><button id="plusQuantity" type="button" aria-label="Increase quantity">+</button></div>
+      <div class="order-total"><span>Estimated total</span><strong id="tradeTotal">₹0</strong></div>
+      <p id="tradeHelp" class="form-hint">This order uses simulated prices. No real money is involved.</p>
+      <p id="tradeError" class="inline-error hidden"></p>
+      <button id="confirmTrade" class="button button-primary full-width" type="submit">Confirm simulated buy</button>
+    </form>
+  </dialog>
+
+  <script src="/js/app.js" defer></script>
+</body>
+</html>
