@@ -9,7 +9,7 @@ InvestPro is a web application developed for a Java OOP coursework project. User
 - User registration and login
 - Investment portfolio management
 - Stocks, bonds, and mutual funds
-- Simulated buying and selling of investments
+- Simulated buying and selling
 - Simulated market price movements
 - Portfolio valuation and profit/loss tracking
 - Transaction history
@@ -21,9 +21,9 @@ InvestPro is a web application developed for a Java OOP coursework project. User
 - **Language:** Java
 - **Backend:** Spring Boot
 - **Database:** MySQL 8.4
-- **Database connectivity:** JDBC and JdbcTemplate
+- **Database Connectivity:** JDBC and JdbcTemplate
 - **Frontend:** HTML, CSS, and JavaScript
-- **Build tool:** Maven
+- **Build Tool:** Maven
 
 ## Object-Oriented Programming Concepts
 
@@ -40,11 +40,9 @@ This project demonstrates the following Java OOP concepts:
 
 ## Project Architecture
 
-The application separates responsibilities into different components:
-
 - **Models:** Represent users and investment instruments.
 - **Controllers:** Handle incoming HTTP requests.
-- **Services:** Implement authentication, trading, portfolio management, and market simulation logic.
+- **Services:** Implement authentication, trading, portfolio management, and market simulation.
 - **Repositories:** Support database operations.
 - **Frontend:** Provides the user interface using HTML, CSS, and JavaScript.
 - **Database:** Stores user and investment-related information in MySQL.
@@ -59,13 +57,13 @@ The application separates responsibilities into different components:
 
 ## Running the Project on macOS
 
-The following instructions describe the local setup used during development. The MySQL data directory and port may differ on other computers.
+The following instructions describe the local development setup. MySQL paths and ports may differ on other computers.
 
 ### 1. Start MySQL 8.4
 
 The development machine uses the MySQL 8.4 data directory `/opt/homebrew/var/mysql84`, socket `/tmp/mysql84.sock`, and port `3307`.
 
-If the existing MySQL 8.4 server is stopped, open a separate Terminal window and run:
+If the existing MySQL server is stopped, open a separate Terminal window and run:
 
 ```bash
 /opt/homebrew/opt/mysql@8.4/bin/mysqld_safe \
@@ -76,7 +74,7 @@ If the existing MySQL 8.4 server is stopped, open a separate Terminal window and
   --log-error=/tmp/mysql84-recovery.err &
 ```
 
-Check that the server is running:
+Check whether the server is running:
 
 ```bash
 /opt/homebrew/opt/mysql@8.4/bin/mysqladmin --socket=/tmp/mysql84.sock ping
@@ -104,15 +102,13 @@ Run:
 
 Enter your existing MySQL root password when prompted.
 
-The setup script creates the InvestPro database and its application user. Review `database/setup.sql` before running it to understand the operations it performs.
+Review `database/setup.sql` before running it to understand the operations it performs.
 
 The application uses `schema.sql` and `data.sql` to initialize its tables and sample investment data when configured to do so by Spring Boot.
 
 ### 3. Configure the Database Password
 
-The application should read its database password from an environment variable rather than a hardcoded password.
-
-Check `src/main/resources/application.properties` for:
+Open `src/main/resources/application.properties` and verify that the password is read from an environment variable:
 
 ```properties
 spring.datasource.password=${DB_PASSWORD}
@@ -124,7 +120,7 @@ In the same Terminal session, set the environment variable:
 export DB_PASSWORD='your_local_database_password'
 ```
 
-Replace the example value with the actual password for your local InvestPro database account. Do not commit real passwords to GitHub.
+Replace the example value with your actual local database password. Never commit real passwords to GitHub.
 
 ### 4. Start the Application
 
@@ -134,9 +130,9 @@ From the project directory, run:
 mvn spring-boot:run
 ```
 
-Maven may need an internet connection to download project dependencies on the first run.
+Maven may need an internet connection to download dependencies on the first run.
 
-When Spring Boot starts successfully, open:
+When Spring Boot starts successfully, open the following address in your browser:
 
 **http://localhost:8080**
 
@@ -146,15 +142,13 @@ New accounts start with ₹1,00,000 in simulated cash.
 
 ### 5. Stop the Application
 
-Return to the Terminal running Spring Boot and press:
-
-**Control + C**
+Return to the Terminal running Spring Boot and press **Control + C**.
 
 This stops the web application but does not delete the database.
 
 ## Troubleshooting
 
-### Maven command not found
+### Maven Command Not Found
 
 Check whether Maven is installed:
 
@@ -164,25 +158,43 @@ mvn -v
 
 If Maven is installed but unavailable in VS Code, restart VS Code and open a new terminal.
 
-### MySQL connection refused
+### MySQL Connection Refused
 
 Confirm that MySQL 8.4 is running and that the configured host and port match your application settings.
 
-### Access denied for the application user
+### Access Denied for the Application User
 
-Verify the database username and password in `database/setup.sql` and `application.properties`. If necessary, review the database user's permissions and update the local configuration.
+Verify the database username and password in `database/setup.sql` and `application.properties`. Review the database user's permissions if necessary.
 
-### Port 8080 is already in use
+### Port 8080 Is Already in Use
 
 Stop the other application using port 8080 or change the Spring Boot server port in `application.properties`.
 
-### Database errors
+### Database Errors
 
 Review the Spring Boot terminal output and verify the database connection settings. Do not delete or reinitialize existing MySQL data directories as a troubleshooting shortcut.
 
+## Application Screenshots
+
+Add screenshots of your actual application to the `screenshots` folder in the project directory.
+
+Replace the example filenames below with the exact names of your screenshot files.
+
+### Login Page
+
+![InvestPro Login](screenshots/login.png)
+
+### Portfolio Dashboard
+
+![InvestPro Dashboard](screenshots/dashboard.png)
+
+### Investment Listings
+
+![InvestPro Investments](screenshots/investments.png)
+
 ## Security Note
 
-This project is intended for local coursework and demonstration purposes. Never publish real passwords, database credentials, or private information. Before deploying an application publicly, implement appropriate production-grade authentication, authorization, input validation, and security controls.
+This project is intended for local coursework and demonstration purposes. Never publish real passwords, database credentials, or private information. Before deploying publicly, implement appropriate production-grade authentication, authorization, input validation, and security controls.
 
 ## Disclaimer
 
